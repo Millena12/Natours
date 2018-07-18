@@ -25,15 +25,22 @@
     height: 15rem;
     background-color: pink;
     float: left;
-    //cria uma forma, no caso um circulo, para embrulhar o texto em volta
-    // A porcentagem se baseia nos valores do elemento. Para funcionar, precisa do float
-    -webkit-shape-outside: circle(50% at 50% 50%);
-    shape-outside: circle(50% at 50% 50%);
-    -webkit-clip-path: circle(50% at 50% 50%);
-    clip-path: circle(50% at 50% 50%);
-
+    border-radius: 50%;
     //melhor forma de mover o conteudo de um elemento com float, é usando o transform.
     transform: translateX(-3rem) skewX(12deg);
+
+    overflow: hidden;
+
+    @supports (clip-path: polygon(0 0)) or (-webkit-clip-path: polygon(0 0)){
+      //cria uma forma, no caso um circulo, para embrulhar o texto em volta
+      // A porcentagem se baseia nos valores do elemento. Para funcionar, precisa do float
+      -webkit-clip-path: circle(50% at 50% 50%);
+      clip-path: circle(50% at 50% 50%);
+      -webkit-shape-outside: circle(50% at 50% 50%);
+      shape-outside: circle(50% at 50% 50%);
+
+      border-radius: none;
+    }
 
     @include respond(phone) {
       transform: translate(-3rem) skewX(0);
